@@ -1,35 +1,32 @@
 <?php
 namespace JokeSite;
 class JokeList {
+	/* database connection */
 	private $pdo;
+	/* sort method */
 	private $sort = 'oldest';
+	/* search keywork if set */
 	private $keyword;
 
-	public function __construct(\PDO $pdo) {
+	public function __construct(\PDO $pdo, string $sort = 'oldest', string $keyword = '') {
 		$this->pdo = $pdo;
+		$this->sort = $sort;
+		$this->keyword = $keyword;
 	}
 
 	public function sort($dir): self {
-		$model = clone $this;
-		$model->sort = $dir;
-		return $model;
+		return new self($this->pdo, $dir, $this->keyword);
 	}
 
-
-	public function search($keyword) {
-		$model = clone $this;
-
-		$model->keyword = $keyword;
-
-		return $model;
-
+	public function search($keyword): self {
+		return new self($this->pdo, $this->sort, $keyword);
 	}
 
-	public function getKeyword() {
+	public function getKeyword(): string {
 		return $this->keyword;
 	}
 
-	public function getSort() {
+	public function getSort(): string {
 		return $this->sort;
 	}
 
@@ -40,7 +37,7 @@ class JokeList {
 		return $this;
 	}
 
-	public function getJokes() {
+	public function getJokes(): array {
 		$parameters = [];
 
 		if ($this->sort == 'newest') {

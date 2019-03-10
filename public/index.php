@@ -17,7 +17,7 @@ if ($route == '') {
 	$model = new \JokeSite\JokeList($pdo);
 	$view = new \JokeList\View();
 }
-if ($route == 'edit') {
+else if ($route == 'edit') {
 	$model = new \JokeSite\JokeForm($pdo);
 	$controller = new \JokeForm\Controller();
 
