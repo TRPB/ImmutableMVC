@@ -19,7 +19,12 @@ class View {
 
 		foreach ($model->getJokes() as $joke) {
 			$output .= '<li>' . $joke['text'];
-			$output .= ' <a href="index.php?route=edit&amp;id=' . $joke['id'] . '">Edit</a>';
+
+			$output .= ' <a href="index.php?edit=delete&amp;id=' . $joke['id'] . '">Edit</a>';
+			$output .= '<form action="index.php?route=delete" method="POST">
+						<input type="hidden" name="id" value="' . $joke['id'] . '" />
+						<input type="submit" value="Delete" />
+						</form>';
 			$output .= 	'</li>';
 		}
 

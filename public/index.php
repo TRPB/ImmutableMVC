@@ -13,6 +13,10 @@ $pdo = new \Pdo('mysql:host=v.je;dbname=' . DB_SCHEMA, DB_USER, DB_PASS, [PDO::A
 
 $route = $_GET['route'] ?? '';
 
+if ($route == '') {
+	$model = new \JokeSite\JokeList($pdo);
+	$view = new \JokeList\View();
+}
 if ($route == 'edit') {
 	$model = new \JokeSite\JokeForm($pdo);
 	$controller = new \JokeForm\Controller();
@@ -25,8 +29,12 @@ if ($route == 'edit') {
 
 	$view = new \JokeForm\View();
 }
-else if ($route == '') {
+else if ($route == 'delete') {
 	$model = new \JokeSite\JokeList($pdo);
+	$controller = new \JokeList\Controller();
+
+	$model = $controller->delete($model);
+
 	$view = new \JokeList\View();
 }
 else if ($route == 'filterList') {

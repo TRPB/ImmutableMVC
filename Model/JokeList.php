@@ -34,8 +34,8 @@ class JokeList {
 	}
 
 	public function delete($id): self {
-		$stmt = $this->pdo->prepare('DELTE FROM joke WHERE id = :id');
-		$stmt->execute([':id' => $id]);
+		$stmt = $this->pdo->prepare('DELETE FROM joke WHERE id = :id');
+		$stmt->execute(['id' => $id]);
 
 		return $this;
 	}
