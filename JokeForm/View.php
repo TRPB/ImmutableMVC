@@ -5,7 +5,8 @@ class View {
 		$errors = $model->getErrors();
 
 		if ($model->isSubmitted() && empty($errors)) {
-			header('location: index.php?route=success');
+			//On success, redirect to list page
+			header('location: index.php');
 			die;
 		}
 
