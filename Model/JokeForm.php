@@ -64,7 +64,7 @@ class JokeForm {
 			// Return a new instance with $record set to the form submission
 			// When the view displays the joke, it will display the invalid
 			// form submission back in the box
-			return new JokeForm($this->pdo, true,  $record, $errors);
+			return new JokeForm($this->pdo, true, $record, $errors);
 		}
 
 		if (!empty($record['id'])) {
@@ -95,7 +95,7 @@ class JokeForm {
 		$stmt = $this->pdo->prepare('UPDATE joke SET text = :text WHERE id = :id');
 		$stmt->execute($record);
 
-		return new JokeForm($this->pdo, true, $record['id']);
+		return new JokeForm($this->pdo, true, $record);
 	}
 
 	/*
